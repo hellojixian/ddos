@@ -33,7 +33,7 @@ struct pseudo_header // for checksum calculation
 };
 
 // random number for port spoofing(0-65535)
-int _randomPort(void) { return rand() % 65535; }
+int randomPort(void) { return rand() % 65535; }
 
 // random number for IP spoofing(0-255)
 int _randomForIp(void) { return rand() % 255; }
